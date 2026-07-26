@@ -1,0 +1,36 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int solution(String[] want, int[] number, String[] discount) {
+        Map<String, Integer> wantMap = new HashMap<>();
+        // want items -> # of items
+        for (int i = 0; i < want.length; i++) {
+            wantMap.put(want[i], number[i]);
+        }
+
+        // First 10 days window count
+        Map<String, Integer> windowMap = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            windowMap.merge(discount[i], 1, Integer::sum);
+        }
+        int result = wantMap.equals(windowMap) ? 1 : 0;
+
+        // Window shift
+        for (int i = 10; i < discount.length; i++) {
+            String out = discount[i - 10];
+            String in = discount[i];
+
+            if (windowMap.merge(out, -1, Integer::sum) == 0) {
+                windowMap.remove(out);
+            }
+            windowMap.merge(in, 1, Integer::sum);
+
+            if (wantMap.equals(windowMap)) {
+                result++;
+            }
+        }
+
+        return result;
+    }
+}
