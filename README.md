@@ -25,7 +25,7 @@
     <td align="center">Language</td>
     <td align="center">Language</td>
     <td align="center">Language</td>
-    <td align="center">Language</td>
+    <td align="center">Java</td>
   </tr> 
 
   <!-- 두 번째 줄: 4명 -->
